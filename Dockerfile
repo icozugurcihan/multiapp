@@ -4,10 +4,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install -g @angular/cli
 RUN npm install
+COPY . . 
 
 # -----Test-----
 FROM base AS test
-COPY . .
 # Installing Playwright
 RUN npx playwright install   
 RUN npx playwright install-deps   
@@ -52,18 +52,16 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* 
 COPY tests/ /app/tests/
 EXPOSE 9323:9323
-CMD [ "npx", "playwright", "test" ]
-
+RUN npx playwright test
+CMD [ "npx","playwright","show-report" ]
 
 # -----Build-----
 FROM base AS build
-COPY . .
 RUN npm run build
 
 
 # -----release-----
 FROM node:20.10.0-slim AS release
-WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 4200
 CMD ["npm", "start"]

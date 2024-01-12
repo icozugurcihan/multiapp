@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:multiapp": "node dist/multiapp/server/server.mjs"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
@@ -45,5 +45,12 @@
     "npx": "^10.2.2",
     "playwright": "^1.40.1",
     "typescript": "~5.2.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "",
+  "license": "ISC"
 }
